@@ -8,6 +8,7 @@ import java.io.FileReader;
 
 @Service
 public class CsvReaderService {
+
     private BufferedReader lector;
 
     private String linea;
@@ -43,5 +44,4 @@ public class CsvReaderService {
         }
     }
 }
-
 

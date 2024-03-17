@@ -1,29 +1,39 @@
 package Lectorarchivos.Reader.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.sql.SQLOutput;
 
 @Service
 public class FileReaderService {
+   //@Autowired
 
-    CsvReaderService csvReaderService;
 
     private String ruta;
     private String tipoArchivo;
 
 
 
-    public FileReaderService(String ruta, String tipoArchivo) {
-        this.ruta = ruta;
-        this.tipoArchivo = tipoArchivo;
-    }
+    public void read(FileReaderService fileReaderService) throws IOException {
 
-    public void read(FileReaderService fileReaderService){
-        if (fileReaderService.getTipoArchivo()=="csv"){
+        if (fileReaderService.getTipoArchivo().equals("csv")){
+            CsvReaderService csvReaderService = new CsvReaderService();
             csvReaderService.readCsv(fileReaderService.ruta);
-            System.out.println("se recibio archivo csv");
-        }
+            System.out.println("Procesando datos csv");
 
+        }
+        if (fileReaderService.getTipoArchivo().equals("xlsx")) {
+            XlsxReaderService xlsxReaderService = new XlsxReaderService();
+            try {
+                xlsxReaderService.procesarArchivoExcel(fileReaderService.getRuta());
+                System.out.println("Procesando datos xlsx");
+            } catch (IOException e) {
+                System.err.println("Error al procesar el archivo Excel: " + e.getMessage());
+            }
+        }
     }
 
     public String getRuta() {
@@ -34,4 +44,3 @@ public class FileReaderService {
         return tipoArchivo;
     }
 }
-
