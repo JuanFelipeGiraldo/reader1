@@ -4,32 +4,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestResult {
 
-    private int objectPass = 0;
-    private int objectFail = 0;
+    private int correctLines = 0;
 
-    public TestResult() {
+    private int incorrectlines = 0;
+
+
+    public void setLinePass(int correctLines) {
+        this.correctLines = correctLines;
     }
 
-    public void setObjectPass(int objectPass) {
-        this.objectPass = objectPass;
+    public void setLineFail(int incorrectlines) {
+        this.incorrectlines =incorrectlines;
     }
 
-    public void setObjectFail(int objectFail) {
-        this.objectFail = objectFail;
+    public int getLinePass() {
+        return correctLines;
     }
-
-    public int getObjectPass() {
-        return objectPass;
-    }
-
-    public int getObjectFail() {
-        return objectFail;
+    public int getLineFail() {
+        return incorrectlines;
     }
     @Override
     public String toString() {
         return "TestResult{" +
-                "pass=" + objectPass +
-                ", fail=" + objectFail +
+                "pass=" + correctLines +
+                ", fail=" + incorrectlines +
                 '}';
     }
 }

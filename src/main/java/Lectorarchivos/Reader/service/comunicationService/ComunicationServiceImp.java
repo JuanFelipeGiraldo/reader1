@@ -6,19 +6,12 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
-
 public class ComunicationServiceImp {
     ComunicationService comunicationService;
     @Autowired
     public ComunicationServiceImp(ComunicationService comunicationService) {
         this.comunicationService = comunicationService;
     }
-
-    public String testearServicios() {
-        return comunicationService.testearServicios();
-    }
-
-
     public boolean read(CsvInformation csvInformation) {
         return comunicationService.read(csvInformation);
     }

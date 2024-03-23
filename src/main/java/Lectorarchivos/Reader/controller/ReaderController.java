@@ -22,28 +22,9 @@ public class ReaderController {
 
     @PostMapping("/reader")
     public TestResult read(@RequestBody FileReaderRequest request) throws IOException {
-        System.out.println("se recibio archivo ");
-       return fileReaderService.read(request);//lectura local
+       return fileReaderService.read(request);
     }
 
-    @GetMapping("/reader")
-    public String test() {
-        return "Reader ON";
-    }
-
-    @GetMapping("/reader/texto2")
-    public String test2() {
-        String s = comunicationServiceImp.testearServicios();
-        System.out.println(s);
-        return s;
-    }
-
-    @PostMapping("/usuarios/test/cvs")
-    public boolean test3(@RequestBody CsvInformation csvInformation) {
-        System.out.println(comunicationServiceImp.read(csvInformation));
-        return comunicationServiceImp.read(csvInformation);
-
-    }
 
 }
 

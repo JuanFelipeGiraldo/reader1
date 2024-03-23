@@ -4,17 +4,23 @@ import Lectorarchivos.Reader.model.CsvInformation;
 import Lectorarchivos.Reader.model.TestResult;
 import Lectorarchivos.Reader.service.comunicationService.ComunicationServiceImp;
 import com.opencsv.bean.CsvToBeanBuilder;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
+import org.slf4j.Logger;
+
+
 
 @Service
 public class CsvReaderService {
-    private int pass = 0;
-    private int fail = 0;
+    private static Logger logger = LoggerFactory.getLogger(CsvReaderService.class);
+    private int trueAnswer = 0;
+    private int falseAnswer = 0;
+    private boolean readingResult;
     private TestResult testResult;
     private ComunicationServiceImp comunicationServiceImp;
     @Autowired
@@ -23,31 +29,28 @@ public class CsvReaderService {
         this.comunicationServiceImp = comunicationServiceImp;
     }
     public TestResult readCsv(String rutaArchivo) throws FileNotFoundException {
-        System.out.println("entro el archivo a crearse");
-
         List<CsvInformation> informationList = new CsvToBeanBuilder(new FileReader(rutaArchivo))
                 .withType(CsvInformation.class)
                 .build()
                 .parse();
-        informationList.forEach(System.out::println);
 
         for (CsvInformation object : informationList) {
-            boolean x = comunicationServiceImp.read(object);
-            if (x == true) {
-                pass++;
-            } else if (x==false){
-                fail++;
+            readingResult = comunicationServiceImp.read(object);
+            if (readingResult == true) {
+                trueAnswer++;
+            }
+            if (readingResult==false){
+                falseAnswer++;
             }
         }
-        System.out.println("objetos creados:" + pass);
-        System.out.println("objetos fallidos:" + fail);
-        testResult.setObjectFail(fail);
-        testResult.setObjectPass(pass);
-        this.fail=0;
-        this.pass=0;
+        logger.debug("objetos creados:" + trueAnswer);
+        logger.debug("objetos fallidos:" + falseAnswer);
+        testResult.setLineFail(falseAnswer);
+        testResult.setLinePass(trueAnswer);
+        this.falseAnswer =0;
+        this.trueAnswer =0;
         return testResult;
 
     }
-
 }
 
