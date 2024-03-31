@@ -1,11 +1,9 @@
 package Lectorarchivos.Reader.controller;
-import Lectorarchivos.Reader.model.CsvInformation;
 import Lectorarchivos.Reader.model.FileReaderRequest;
 import Lectorarchivos.Reader.model.TestResult;
 import Lectorarchivos.Reader.service.readerService.FileReaderService;
-import Lectorarchivos.Reader.service.comunicationService.ComunicationServiceImp;
+import Lectorarchivos.Reader.service.comunicationSpringBootService.ComunicationServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +22,6 @@ public class ReaderController {
     public TestResult read(@RequestBody FileReaderRequest request) throws IOException {
        return fileReaderService.read(request);
     }
-
 
 }
 

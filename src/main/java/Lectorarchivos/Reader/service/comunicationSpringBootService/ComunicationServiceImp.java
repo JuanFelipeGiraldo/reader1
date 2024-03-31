@@ -1,8 +1,7 @@
-package Lectorarchivos.Reader.service.comunicationService;
+package Lectorarchivos.Reader.service.comunicationSpringBootService;
 
 import Lectorarchivos.Reader.model.CsvInformation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service

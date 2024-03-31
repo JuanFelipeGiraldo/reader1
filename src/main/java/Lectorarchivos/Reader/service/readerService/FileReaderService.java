@@ -17,7 +17,7 @@ public class FileReaderService {
     public TestResult read(FileReaderRequest fileReaderRequest) throws IOException {
         if (fileReaderRequest.getTipoArchivo().equals("csv")) {
             try {
-                return csvReaderService.readCsv(fileReaderRequest.getRuta());
+                return csvReaderService.readCsv(fileReaderRequest.getRuta(),fileReaderRequest.getTipoLectura());
             } catch (IOException e) {
                 System.out.println("Error al procesar archivo CSV" + e.getMessage());
             }

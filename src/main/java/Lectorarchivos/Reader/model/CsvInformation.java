@@ -1,6 +1,8 @@
 package Lectorarchivos.Reader.model;
 import com.opencsv.bean.CsvBindByName;
 
+import java.io.Serializable;
+
 public class CsvInformation {
     @CsvBindByName(column = "Index")
     private String index;

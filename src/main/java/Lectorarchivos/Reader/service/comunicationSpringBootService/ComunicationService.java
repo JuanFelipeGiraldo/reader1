@@ -1,4 +1,4 @@
-package Lectorarchivos.Reader.service.comunicationService;
+package Lectorarchivos.Reader.service.comunicationSpringBootService;
 
 import Lectorarchivos.Reader.model.CsvInformation;
 import org.springframework.cloud.openfeign.FeignClient;
